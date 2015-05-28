@@ -1,0 +1,246 @@
+/* CSS Document */
+/*数据表格样式*/
+.tableList {
+	border-collapse:collapse;
+}
+.tableList tr.odd {
+	background-color:#FFFFFF
+}
+.tableList tr.even {
+
+}
+.tableList th,.tableList td {
+	border:1px solid #654b24
+}
+.tableList td {
+	height:30px;
+}
+.tableList th {
+	height:40px;
+}
+
+/*各页数据表格上的查询条件*/
+.filter {
+	border:1px solid #654b24;
+	border-bottom:none;
+	height:50px;
+	margin-bottom:0px;
+	border-top-left-radius:6px;
+	border-top-right-radius:6px;
+}
+.filter .inputInfo {
+	width:100px;
+}
+.filter select {
+	padding:1px
+}
+.filter table,.filter td {
+	border:0px solid #654b24;
+}
+.filter table {
+	margin:12px auto 0 auto
+}
+.filter .btn {
+	height:26px;
+	text-align:center;
+	line-height:0px
+}
+
+/*各页数据表格上下翻页效果*/
+.pager { 
+	height:44px;
+	border:1px solid #654b24;
+	color:#555;
+	border-top:1px solid transparent;
+	margin-top:-1px;
+	padding:0;
+}
+.class title{
+    width: 150px;
+}
+.pager .fanye{ 
+	width:100%;
+	margin-right:20px; 
+	margin-top:9px; 
+	line-height:24px; 
+	text-align:center;
+	_display:inline;
+	border:0px solid;
+}
+
+.pager .fanye .fanye1{ 
+	position:absolute;
+	left:50%;
+	margin-left:-300px;
+	text-align:center;
+	width:600px;
+	border:0px solid
+}
+
+.pager .fanye .fanye2{ 
+	float:right;
+	margin-right:10px;
+	border:0px solid;
+	display:inline-block
+}
+
+.pager .num,.pager .current,
+.pager .first,.pager .end,
+.pager .prev,.pager .next {
+	display:inline-block;
+	text-decoration:none;
+	border-radius: 6px;
+	height:24px;
+}
+.pager .num,.pager .current {
+	position:relative;
+	top:1px;
+	width:24px;
+	margin-left:2px;
+	margin-right:2px;
+}
+.pager .first,.pager .end {
+	width:40px;
+	font-size:12px;
+}
+.pager .prev,.pager .next {
+	width:50px;
+	font-size:12px;
+}
+
+.pager #gopage_wrap {
+	
+}
+
+.pager #gopage_input {
+	width:30px;
+	height:16px;
+	text-align:center;
+	margin:0 3px
+}
+
+.pager #gopage_btn_confirm {
+	display:inline-block;
+	font-size:12px;
+	border-radius: 6px;
+	height:24px;
+	width:40px;
+	cursor:pointer;
+}
+
+/*详情信息弹出框*/
+#detailDialog {
+	position:absolute;
+	float:left;
+	height:auto;
+	width: 80%;
+	display:none;
+	-webkit-box-shadow: 0 0 10px #121a2a;
+        margin-left: 8%;
+        margin-top: 2%;
+	box-shadow: 0 0 20px #121a2a;
+	padding:20px;
+	background-color:#FFF;
+	cursor:move;
+}
+#detailDialog #close {
+	position:absolute;
+	right:3px;
+	top:3px;
+	width:12px;
+	height:12px;
+	line-height:11px;
+	border:1px solid;
+	cursor:pointer
+}
+#detailDialog table,#detailDialog tr,#detailDialog td{
+	border-color:#d9d6c4;
+	background-color:#FFF;
+	cursor:default
+}
+#detailDialog table {
+	width:100%;
+}
+#detailDialog tr,#detailDialog td {
+	height:40px;
+}
+#detailDialog td span {
+	margin-left:10px;
+	margin-right:10px;
+	cursor:text
+}
+#detailDialog td{
+	text-align:left;
+}
+#detailDialog .label{
+	font-weight:600;
+	color:#654b24;
+	text-align:center;
+}
+#detailDialog .closeHover {
+	background-color:#f391a9;
+	color:#FFF
+}
+#detailDialog .closeMouseDown {
+	background-color:#aa2116;
+	color:#f6f5ec
+}
+
+
+
+#detailDialog_edit {
+	position:absolute;
+	float:left;
+	height:auto;
+	width: 80%;
+	display:none;
+	-webkit-box-shadow: 0 0 10px #121a2a;
+        margin-left: 8%;
+        margin-top: 2%;
+	box-shadow: 0 0 20px #121a2a;
+	padding:20px;
+	background-color:#FFF;
+	cursor:move;
+}
+#detailDialog_edit #close {
+	position:absolute;
+	right:3px;
+	top:3px;
+	width:12px;
+	height:12px;
+	line-height:11px;
+	border:1px solid;
+	cursor:pointer
+}
+#detailDialog_edit table,#detailDialog_edit tr,#detailDialog_edit td{
+	border-color:#d9d6c4;
+	background-color:#FFF;
+	cursor:default
+}
+#detailDialog_edit table {
+	width:100%;
+}
+#detailDialog_edit tr,#detailDialog_edit td {
+	height:40px;
+}
+#detailDialog_edit td span {
+	margin-left:10px;
+	margin-right:10px;
+	cursor:text
+}
+#detailDialog_edit td{
+	text-align:left;
+}
+#detailDialog_edit .label{
+	font-weight:600;
+	color:#654b24;
+	text-align:center;
+}
+#detailDialog_edit .closeHover {
+	background-color:#f391a9;
+	color:#FFF
+}
+#detailDialog_edit .closeMouseDown {
+	background-color:#aa2116;
+	color:#f6f5ec
+}

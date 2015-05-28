@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>添加开发商</title>
+        <link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+        <!-- <link href="__PUBLIC__/Css/select.css" rel="stylesheet" type="text/css" /> -->
+        <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+        <!-- <script type="text/javascript" src="__PUBLIC__/Js/jquery.idTabs.min.js"></script> -->
+        <!-- <script type="text/javascript" src="__PUBLIC__/Js/select-ui.min.js"></script> -->
+        <!-- <script type="text/javascript" src="__PUBLIC__/Js/kindeditor.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.min.css">
+            <link rel="stylesheet" href="__PUBLIC__/Css/uploadify.css">
+                <script src='__PUBLIC__/Js/jquery.uploadify.min.js'></script>
+                <script type="text/javascript">
+                    $(function(){
+                        // alert(1)
+                        //简单验证
+                      /*  var validate = {
+                            'username' : false,
+                            'type_id':false
+                        };
+                        $('#name').blur(function(){
+                            if($.trim($(this).val()) == ''){
+                                $('#name_info').text('商家名字不能为空').css('color','red');
+                                validate.username = false;
+                            }else{
+                                $('#name_info').text('');
+                                validate.username = true;
+                            }
+                        });
+                        $('#soncate').change(function(){
+                            if($.trim($(this).val()) == 0){
+                                $('#type_info').text('请选择分类').css('color','red');
+                                validate.type_id = false;
+                            }else{
+                                $('#type_info').text('');
+                                validate.type_id = true;
+                            }
+                        });
+                        $('form').submit(function(){
+                            $('#name').trigger('blur');
+                            var isOK = validate.username && validate.type_id
+                            if(!isOK){
+                                if($(".pro_into").text()=="请选择"){
+                                    $('#skuTitle2').text("您还未选择分类")
+                                    $('#skuNotice').show();
+                                    setTimeout( function(){
+                                        $( '#skuNotice' ).fadeOut();
+                                    }, ( 1 * 1000 ) ); 
+                                    return false;
+                                }
+                            }
+                            return true;
+            
+                        });
+                    })*/
+                </script>
+                <style type="text/css">
+                    .pro{  float: left;line-height: 30px;margin-bottom: 10px; margin-left: 5px;}
+                    #imgs_more{ width: 100%}
+                    .sku_tip { background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7);border-radius: 4px;box-shadow: 0 0 3px 3px rgba(150, 150, 150, 0.7);color: #fff;display: none;left: 50%;margin-left: -70px; padding: 5px 10px;position: fixed; text-align: center; top: 50%;z-index: 25;}
+                    .pro select{width: 345px;height: 32px; }
+                    .box{ margin-left: 5px; font-size: 12px; margin-top: -3px; padding-left:5px; padding:3px;}
+                    .forminfo li input{width: 345px;height: 32px;margin-left: 5px; }
+                </style>
+                </head>
+                <body style="background: none;">
+
+                    <div class="place">
+                        <span>后台管理：</span>
+                        <ul class="placeul">
+                            <li><a href="#">合作商家管理</a></li>
+                            <li><a href="#">添加生活导航商家</a></li>
+                        </ul>
+                    </div>
+                    <form action="" method="post" name ="vform">
+                            <input type ="hidden" name="bsid" value="{$info.bsid}">
+                                <input type ="hidden" name="action" id="action" value="{$data.action}">
+                                    <input type ="hidden" name="admin" value={$Think.session.admin.name}>
+                                        <div class="formbody">
+                                            <div class="formtitle"><span>{$data.title}</span></div>
+                                            <ul class="forminfo">
+                                                <li><label>店铺名称</label><input name="bsname" id="name"  type="text" class="dfinput"  value="{$info.bsname}" /><i id="name_info">名称不能超过30个字符</i></li>
+                                                <li><label>店铺电 话</label><input name="phone" type="text" class="dfinput" value="{$info.phone}"/><i>电话号码</i></li>
+                                                <li><label>店铺客服qq 话</label><input name="qq" type="text" class="dfinput" value="{$info.qq}"/><i>qq</i></li>
+                                                <li><label>店铺地址</label><input name="address" type="text" class="dfinput" value="{$info.address}" /><i>街道地址</i></li>
+                                                <li style="height:85px"><label>店铺描述</label><textarea rows="5"  cols='50' style="border:1px solid #A7B5BC" name ="content" value="{$info.content}">{$info.content}</textarea><i>描述</i></li>
+                                                <li><label>店铺图片</label>
+                                  <div id="list_hidden">
+                               
+                                    <input type ='hidden' name = "mid_pic" value="{$info.mid_pic}">
+                                        <input type ='hidden' name = "list_pic" value="{$info.list_pic}">
+                                            </div></li>
+                                            <li style="position:relative;margin-bottom:5px;height:55px"><input name="list_pic" id="upload_list" type="file" class="dfinput" style="" value="{$info.list_pic}" /><i  id ="imgs" style="position:absolute;left:150px;top:-5px;">
+                                                    <if condition = "$info.list_pic neq ''">
+                                                        <div class="up_list_pic">
+                                                            <img height='50px' src='{$info.list_pic}'>
+                                                                <img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deleteListPic()'> 
+                            </div>
+                            </if>
+                            </i></li>
+                            <li><label>店铺图册</label><i></i></li> 
+                            <li style="position:relative;margin-bottom:5px;height:55px"><input type = "file" id ="upload_more">
+                             <i  id ="imgs_more" style="position:absolute;left:150px;top:-5px;">
+                                 <div id = 'more_{$k}' class = ' more_list_pic' num = 0 > 
+                                 </div>
+                                 <if condition = "$info.more_pic neq ''">
+                                 <volist name="info.more_pic" id="vo" key = 'k'>
+                                 <div id = 'more_{$k}' class = ' more_list_pic' num = "{$k}" style=" float: left">
+                                <img width='50px' src='{$vo.mid}' name ='path'>
+                                <input type='hidden' name='path[]'  value='{$vo.pic}'/>
+                                <input type='hidden' name='mid[]' value='{$vo.mid}'/>
+                                <input type='hidden' name='pic_name[]' value='{$vo.name}'/>
+                                <img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deletePic({$k})' > 
+                                    </div>
+                                    </volist>
+                                    </if>
+                                    </i></li>
+                                    <li><label>店家负责人</label><input name="owner" id="notice" type="text" class="dfinput" value="{$info.owner}" /><i></i></li>  
+                                <li><label>所属商家</label>
+                                <select  class="form-control" name = 'bid' style="width: 345px;height: 32px;" >
+                                    <option name = 'bid' class="house_into"  value="{$region.id}">{$region.name}</option>
+                                    <volist name='pro' id = "vo">
+                                        <option name = 'bid'  value="{$vo.id}">{$vo.name}</option>
+                                    </volist>
+                                </select>
+                            </li>
+                                    <li><label>&nbsp;</label><input name="" type="submit" class="btn btn-primary" value="确认{$data.btn}"  onclick="javascript:;" /></li>
+                                </ul>
+
+                            </div>
+                          </form>
+
+                   </body>
+                                                    <script>
+
+
+                                                        var list_pic = "";
+                                                        $('#upload_list').uploadify({
+                                                            'swf'      : '__PUBLIC__/Images/uploadify.swf',
+                                                            'uploader' : '{:U("Uploads/listUpload")}',
+                                                            'cancelImage':'__PUBLIC__/Images/uploadify-cancel.png',
+                                                            'buttonText' : '列表上传',
+                                                            'multi': false,
+                                                            'onUploadSuccess' : function(file, data, response) {
+                                                                // alert(data);
+                                                                obj= $.parseJSON(data);
+                                                                list_pic += "<img height='50px' src='"+obj.path+"'>";
+                                                                list_pic +=" <img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deleteListPic()'> "
+                                                                $('#imgs').html(list_pic);
+                                                                var hid ="<input name='list_path' id='list_path' type='hidden' value='"+obj.path+"' />";
+                                                                hid +="<input name='mid_pic' id='mid_pic' type='hidden' value='"+obj.mid+"' />"
+                                                                hid +="<input name='list_pic' id='list_pic' type='hidden' value='"+obj.min+"' />"
+                                                                $('#list_hidden').html(hid);
+                                                            }
+                                                        });
+                                                        var img = '';
+                                                        var num = $('.more_list_pic').last().attr('num')+1;
+
+                                                        $('#upload_more').uploadify({
+                                                            'swf'      : '__PUBLIC__/Images/uploadify.swf',
+                                                            'uploader' : '{:U("Uploads/photo",'','')}',
+                                                            'cancelImage':'__PUBLIC__/Images/uploadify-cancel.png',
+                                                            'buttonText' : '缩略图上传',
+                                                            'onUploadSuccess' : function(file, v, response) {
+                                                                obj= $.parseJSON(v);
+                                                                // console.log(obj)
+                                                                img += "<div id = 'more_"+num+"' class = ' more_list_pic' num = '"+num+"'>"
+                                                                img += "<img width='50px' src='"+obj.path+"' name ='path'>";
+                                                                img += "<input type='hidden' name='path[]'  value='"+obj.path+"'/>";
+                                                                img += "<input type='hidden' name='mid[]' value='"+obj.mid+"'/>";
+                                                                img += "<input type='hidden' name='pic_name[]' value='"+obj.name+"'/>";
+                                                                img += "<img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deletePic("+num+")'> ";
+                                                                img += "</div>"
+                                                                $('#imgs_more').append(img);
+                                                                img = '';
+                                                                num++;
+                                                            }
+                                                        });
+                                                        function deletePic(num){
+                                                            $("#more_"+num+"").html('');
+                                                            // $('this').parent('.more_list_pic').remove();
+                                                        }
+                                                        function deleteListPic(){
+                                                            $(".up_list_pic").html('');
+                                                            $('#list_hidden').html('');
+                                                        }
+                                                        function openwindow()
+                                                        {
+                                                            var url = 'http://api.map.baidu.com/lbsapi/getpoint/'; //转向网页的地址;
+                                                            var name="获取经纬"; //网页名称，可为空;
+                                                            var iWidth='800'; //弹出窗口的宽度;
+                                                            var iHeight='600'; //弹出窗口的高度;
+                                                            //window.screen.height获得屏幕的高，window.screen.width获得屏幕的宽
+                                                            var iTop = (window.screen.height-30-iHeight)/2; //获得窗口的垂直位置;
+                                                            var iLeft = (window.screen.width-10-iWidth)/2; //获得窗口的水平位置;
+                                                            window.open(url,name,'height='+iHeight+',,innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
+                                                        }
+                                                        function ShowPage()
+                                                        {
+                                                            showModalDialog('http://api.map.baidu.com/lbsapi/getpoint/','example04','dialogWidth:400px;dialogHeight:300px;dialogLeft:200px;dialogTop:150px;center: yes;help:no;resizable:no;status:no')
+                                                        }
+
+                                                    </script>
+                                                    <script type="Text/Javascript">
+                                                  </script>
+     </html>

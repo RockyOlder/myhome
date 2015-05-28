@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>无标题文档</title>
+<link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/Css/tableList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/jquery-ui/css/pepper-grinder/jquery-ui.min.css">
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/Js/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+<link href="__PUBLIC__/Css/topShow.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.min.css">
+<script type="text/javascript" type="text/javascript">
+
+   
+         
+         
+    $(function(){
+        $('#select_deve img').bind('click',function(){
+            $("#vform").submit();
+            //     selectDeveloper()
+        });
+    })   
+</script>
+
+
+
+</head>
+<style type="text/css">
+    form ul{width: 100%;}
+    form ul li{float: left;width: 110px;line-height: 25px;text-align: center;}
+    form ul input{border: 1px solid #ccc;width: 100px;}
+    form ul select{border: 1px solid #ccc;width: 100px;}
+</style>
+
+    <body style="background: none;">
+        <input type="hidden" value="__CONTROLLER__/del/id/" id="url_ajaxCalendar" name="url_ajaxCalendar" />
+        <div class="place">
+            <span><a href="{:U('Index/start')}">首页</a></span>
+            <ul class="placeul">
+                <li><a href="{:U('index')}">角色管理</a></li>
+                <li><a href="{:U('index')}">角色列表</a></li>
+            </ul>
+        </div>
+
+        <div class="rightinfo">
+
+            <div class="tools">
+                <div class="tools">
+                    <form action="" method="post" name="vform" id="vform">
+                        <ul>
+                            <!-- <li>开发商类别:</li>
+                            <li>
+                                <select name="type">
+                                    <option value="0">全部</option>
+                                    <option value="1">总部</option>
+                                </select>
+                            </li> -->
+                            <li>角色名称:</li>
+                            <li><input type="text" value="" class="form-control" name ="name" /></li>
+                            <li><span id="select_deve" style="cursor:pointer"><img src="__PUBLIC__/Images/ico06.png" width="25"/></span></li>
+                            <a href="{:U('add')}"><li class="click"><span><img src="__PUBLIC__/Images/t01.png" /></span>添加角色</li></a>
+                        </ul>
+                    </form>
+
+                </div>
+            </div>
+
+
+            <table class="tablelist">
+                <thead>
+                    <tr>
+                        <!-- <th><input name="" type="checkbox" value="" checked="checked"/></th> -->
+                        <th>编号<i class="sort"><img src="__PUBLIC__/Images/px.gif" /></i></th>
+                        <th>角色名</th>
+                        <th>描述</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+
+                <tbody id="table_ajax_list">
+                    <volist name="data" id ="vo">
+                        <tr>
+                            <!-- <td><input name="num" type="checkbox" value="" /></td> -->
+                            <td>{$vo.id}</td>
+                            <td>{$vo.title}</td>
+                            <td>{$vo.description}</td>  
+                            <td>{$vo.status}</td>     
+                            <td>
+                                <a href="{:U('authority',array(id=>$vo['id']),'')}" class="tablelink"> 权限设置</a>
+                                <a href="{:U('edit',array(id=>$vo['id']),'')}" class="tablelink">修改</a>    
+
+                                <a href="{:U('del',array(id=>$vo['id']),'')}" class="tablelink" onclick="if(confirm('确认删除')){return true}else{return false}"> 删除</a>
+                                
+
+                            </td>
+                        </tr> 
+
+                    </volist>    
+                </tbody>
+            </table>
+
+            <input type="hidden" value="{:U('del',array(id=>''),'')}" id="del_url">
+            <div id="pager" class="pager">
+                <div class="fanye">
+                    <div class="fanye1">
+                        {$page}
+                    </div>
+                    <div class="fanye2">
+                        <span class="">共{$currentPage}/{$totalPage}页</span>
+                        转到<input type="text" value="{$currentPage}" id="gopage_input" class="ui-widget-header" />页&nbsp;
+                        <input type="button" value="确定" id="gopage_btn_confirm" />
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="tip">
+                <div class="tiptop"><span>提示信息</span><a></a></div>
+
+                <div class="tipinfo">
+                    <span><img src="__PUBLIC__/Images/ticon.png" /></span>
+                    <div class="tipright">
+                        <p>是否确认对信息的修改 ？</p>
+                        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+                    </div>
+                </div>
+
+                <div class="tipbtn">
+                    <input name="" type="button"  class="sure" value="确定" />&nbsp;
+                    <input name="" type="button"  class="cancel" value="取消" />
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+        <script type="text/javascript">
+            $('.tablelist tbody tr:odd').addClass('odd');
+        </script>
+
+    </body>
+
+</html>

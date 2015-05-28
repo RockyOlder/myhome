@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>推荐商店列表</title>
+        <link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/Css/tableList.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/jquery-ui/css/pepper-grinder/jquery-ui.min.css">
+            <link id="artDialogSkin" href="__PUBLIC__/Css/skin/aero/aero.css" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.min.css">
+                <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+                <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+                <script type="text/javascript" src="__PUBLIC__/Js/bootstrap.min.js"></script>
+                <script type="text/javascript" src="__PUBLIC__/Js/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+                <link href="__PUBLIC__/Css/topShow.css" rel="stylesheet" type="text/css" />
+                <script type="text/javascript" src="__PUBLIC__/Js/artDialog.js"></script>
+
+                <script type="text/javascript" type="text/javascript">
+                    function deleteSum(id){
+                        if(confirm("确认删除"))
+                            location.href="/whr/index.php?s=/Home/Admin/del/id/"+id
+                    }
+                    $(function(){
+                        $( document ).tooltip({
+                            track: true,
+                            width: "100px",
+                            position: {
+                                my: "left+5 bottom-5", 
+                                at: "center top"
+                            }
+                        });
+                        $('#select_deve img').bind('click',function(){
+                            $("#vform").submit();
+                            //     selectDeveloper()
+                        });
+                        initPager();
+                    });
+                    function cats_Shop(id) {
+                    
+                        art.dialog({
+                            content:'你确定要删除？',
+                            title: '确定框',  
+                            okValue:'确认',  
+                            cancelValue:'取消', 
+                            width: 230,  
+                            height: 100,  
+                            fixed:true,
+                            id:'bnt4_test',
+                            style:'confirm'}, 
+                        function(){
+                            var msg = art.dialog({id:'bnt4_test'}).data.content; // 使用内置接口获取消息容器对象
+                            if(msg){
+                                location.href=$("#url_ajaxCalendar").val()+id
+                                return false;
+                            }        
+                        },function(){
+                            return true;
+                        });
+                    };
+                </script>
+                </head>
+                <style type="text/css">
+                    form ul{width: 100%;}
+                    form ul li{float: left;width: 110px;line-height: 25px;text-align: center;}
+                    form ul input{border: 1px solid #ccc;width: 100px;}
+                    form ul select{border: 1px solid #ccc;width: 100px;}
+                    .th_default{padding: 0 3px;}
+                    .redclss{ color: red;}
+                    #ig_primary{float: right; margin-top: 3px;}
+                    .divBtn {position:relative;display:inline-block;padding:3px;cursor:pointer}
+                    .tablelist td{line-height:35px; text-indent: 10px; border-right: dotted 1px #c7c7c7;}
+                </style>
+
+                <body style="background: none;">
+                    <input type="hidden" value="__CONTROLLER__/ajax_del_shop/id/" id="url_ajaxCalendar" name="url_ajaxCalendar" />
+                    <div class="place">
+             
+                        <ul class="placeul">
+                              <li><a href="{:U('Index/start','','')}">首页</a></li>
+                            <li><a href="#">推荐商店列表</a></li>
+                        </ul>
+                    </div>
+                    <div class="rightinfo">
+                        <div class="tools">
+                            <form action="" method="post" name="vform" id="vform">
+                                <ul>
+                        
+                                    <li>商店名称</li>
+                                    <li><input type="text" value="" class="form-control" name ="name" /></li>
+                                    <li><span id="select_deve"><img src="__PUBLIC__/Images/ico06.png" width="25"/></span></li>
+                                  
+                                </ul>
+                            </form>
+
+                        </div>
+                        <table class="tablelist">
+                            <thead>
+                                <tr>
+                                    
+                                    <th>商店图片</th>
+                                    <th>商店名称</th>
+                                    <th>标题</th>
+                                    <th>简介</th>
+                                    <th>推荐范围</th>
+                                    <th>推荐状态</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th colspan="2">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_ajax_list">
+                                <volist name="data" id ="vo">
+                                    <tr  id = "{$vo.id}">
+                                        
+                                        <td><img src="{$vo.list_pic}"  width="50px"></td>
+                                        <td>{$vo.name}</td>
+                                        <td>{$vo.title}</td>
+                                        <td>{$vo.info}</td>   
+                                        <td>{$vo.extent}</td>  
+                                        <td>{$vo.now_statue}</td> 
+                                        <td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+                                        <td>{$vo.deadline|date="Y-m-d H:i",###}</td>
+
+                                        <td width="20px" class="th_default" align="center"><a href="{:U('recommendedBusiness',array(id=>$vo['id']),'')}" class="divBtn editBtn ui-state-default ui-corner-all" title="编辑" ><span class="ui-icon ui-icon-pencil"></span></a></td>
+                                        <td width="20px" class="th_default" align="center"><div class="divBtn deleteBtn ui-state-default ui-corner-all" title="删除"onclick="return cats_Shop({$vo.id})"><span class="ui-icon ui-icon-minus"></span></div></td>
+                                    </tr> 
+
+                                </volist>    
+                            </tbody>
+                        </table>
+                        <div id="pager" class="pager">
+                            <div class="fanye">
+                                <div class="fanye1">
+                                    {$page}
+                                </div>
+                                <div class="fanye2">
+                                    <span class="">共{$currentPage}/{$totalPage}页</span>
+                                    转到<input type="text" value="{$currentPage}" id="gopage_input" class="ui-widget-header" />页&nbsp;
+                                    <input type="button" value="确定" id="gopage_btn_confirm" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tip">
+                            <div class="tiptop"><span>提示信息</span><a></a></div>
+
+                            <div class="tipinfo">
+                                <span><img src="__PUBLIC__/Images/ticon.png" /></span>
+                                <div class="tipright">
+                                    <p>是否确认对信息的修改 ？</p>
+                                    <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+                                </div>
+                            </div>
+
+                            <div class="tipbtn">
+                                <input name="" type="button"  class="sure" value="确定" />&nbsp;
+                                <input name="" type="button"  class="cancel" value="取消" />
+                                <input type="hidden" value="{:U('ajax_del_shop')}" id="delete"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $('.tablelist tbody tr:odd').addClass('odd');
+                    </script>
+                    <script type="text/javascript">          
+                        function ajax_delete(id){
+                            var url = $("#delete").val();
+                            $.ajax({ 
+                                url:url,
+                                type:"post",
+                                dataType:"json",
+                                data: {
+                                    "id":id
+                                },
+                                success:function(data){
+                                    //alert(data);
+                                    if (data['statue'] == 1) {
+                                        $('#'+id).hide(100);
+                                        alert(data['msg']);
+                                    }else{
+                                        alert(data['msg']);
+                                    };
+                    
+                                }
+                            });
+                        }
+                    </script>
+
+                </body>
+
+                </html>

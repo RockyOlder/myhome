@@ -1,0 +1,17 @@
+       
+
+            .tableList tr td{height: 60px; }
+            .tableList tr td img title{width: 20%; }
+            .tableList tr td.hover {background: palegoldenrod;}
+            .tableList tr td.jiaqi{background: salmon;border:solid white;}
+            .tableList tr td.haveClass{background:peachpuff;border:solid white;}
+            .tableList tr td.new_day{background:burlywood;border:solid white;}
+            .tableList tr td .span_color{ color:red;}
+             .imgBtn_my_message{ color: chocolate; text-align: center;cursor:pointer;}
+             #my_message{font-size: 12px; }
+            .filter a:hover{ text-decoration:none; }
+            .ui-tooltip, .arrow:after { background: slategray;   border: 2px solid white; }
+            .ui-tooltip { padding: 10px 20px;  color: white; border-radius: 20px; font: bold 14px "Helvetica Neue", Sans-Serif; text-transform: uppercase;  box-shadow: 0 0 7px black;}
+            .cen_tent{text-align: center;}
+            .Cycle_operation{ color: #cd0a0a; font-size: 13px; background: papayawhip;}
+            .cycle{ color:red; background: wheat;}

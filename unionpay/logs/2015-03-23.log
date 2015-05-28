@@ -1,0 +1,47 @@
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/payfor.php ], Line[20]------ ============处理前台请求开始=============== 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[16]------ =====签名报文开始====== 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[22]------ 签名key=val&...串 >accessType=0&backUrl=http://master.huishare.com/api.php?s=Balance/unionpay&bizType=000201&certId=124876885185794726986301355951670452718&channelType=08&currencyCode=156&defaultPayType=0001&encoding=utf-8&frontUrl=http://127.0.0.1/unionpay/demo/utf8/FrontReceive.php&merId=777290058111477&orderId=201503191004589955168&reqReserved= 透传信息&signMethod=01&txnAmt=100&txnSubType=01&txnTime=20150323090508&txnType=01&version=5.0.0 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[25]------ 摘要sha1x16 >7e187c30eb398b9b52f07f6394d4c6dadd5f1435 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[33]------ 签名串为 >nDdKl2ZrZn8zL4ezs9MNmLzvvYSKCIgJT9+vUhMYX4VyU8/PJ75nTBrwjiIlLs6EP7WHpoF+Y1GvBNMTD9ZByw180lb7EJeivtmR7AHzRxIfAUzIDZsAibGVUqRYdvsgJVBusnwsf0dqMYdpLGCAypC8SdePD+m2pI0x1iQ3kj8= 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[38]------ =====签名报文结束====== 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/payfor.php ], Line[51]------ 前台请求地址为>https://101.231.204.80:5000/gateway/api/frontTransReq.do 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/payfor.php ], Line[55]------ -------前台交易自动提交表单>--begin---- 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/payfor.php ], Line[56]------ <html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body  onload="javascript:document.pay_form.submit();">
+    <form id="pay_form" name="pay_form" action="https://101.231.204.80:5000/gateway/api/frontTransReq.do" method="post">
+	    <input type="hidden" name="version" id="version" value="5.0.0" />
+    <input type="hidden" name="encoding" id="encoding" value="utf-8" />
+    <input type="hidden" name="certId" id="certId" value="124876885185794726986301355951670452718" />
+    <input type="hidden" name="txnType" id="txnType" value="01" />
+    <input type="hidden" name="txnSubType" id="txnSubType" value="01" />
+    <input type="hidden" name="bizType" id="bizType" value="000201" />
+    <input type="hidden" name="frontUrl" id="frontUrl" value="http://127.0.0.1/unionpay/demo/utf8/FrontReceive.php" />
+    <input type="hidden" name="backUrl" id="backUrl" value="http://master.huishare.com/api.php?s=Balance/unionpay" />
+    <input type="hidden" name="signMethod" id="signMethod" value="01" />
+    <input type="hidden" name="channelType" id="channelType" value="08" />
+    <input type="hidden" name="accessType" id="accessType" value="0" />
+    <input type="hidden" name="merId" id="merId" value="777290058111477" />
+    <input type="hidden" name="orderId" id="orderId" value="201503191004589955168" />
+    <input type="hidden" name="txnTime" id="txnTime" value="20150323090508" />
+    <input type="hidden" name="txnAmt" id="txnAmt" value="100" />
+    <input type="hidden" name="currencyCode" id="currencyCode" value="156" />
+    <input type="hidden" name="defaultPayType" id="defaultPayType" value="0001" />
+    <input type="hidden" name="reqReserved" id="reqReserved" value=" 透传信息" />
+    <input type="hidden" name="signature" id="signature" value="nDdKl2ZrZn8zL4ezs9MNmLzvvYSKCIgJT9+vUhMYX4VyU8/PJ75nTBrwjiIlLs6EP7WHpoF+Y1GvBNMTD9ZByw180lb7EJeivtmR7AHzRxIfAUzIDZsAibGVUqRYdvsgJVBusnwsf0dqMYdpLGCAypC8SdePD+m2pI0x1iQ3kj8=" />
+    <input type="submit" type="hidden">
+    </form>
+</body>
+</html> 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/payfor.php ], Line[57]------ -------前台交易自动提交表单>--end------- 
+2015-03-23 9:05:08, INFO, 14.17.18.152, File[ /alidata/www/default/unionpay/utf8/payfor.php ], Line[58]------ ============处理前台请求 结束=========== 
+2015-03-23 9:05:10, INFO, 183.60.62.44, File[ /alidata/www/default/unionpay/utf8/gettn.php ], Line[29]------ ============处理前台请求开始=============== 
+2015-03-23 9:05:10, INFO, 183.60.62.44, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[16]------ =====签名报文开始====== 
+2015-03-23 9:05:10, INFO, 183.60.62.44, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[22]------ 签名key=val&...串 >accessType=0&backUrl=http://master.huishare.com/api.php?s=Balance/unionpay&bizType=000202&certId=124876885185794726986301355951670452718&channelType=08&currencyCode=156&encoding=utf-8&frontUrl=http://127.0.0.1/unionpay/demo/utf8/FrontReceive.php&merId=777290058111477&orderDesc=订单描述&orderId=2015031854985355&reqReserved= 透传信息&signMethod=01&txnAmt=1&txnSubType=01&txnTime=20150323090510&txnType=01&version=5.0.0 
+2015-03-23 9:05:10, INFO, 183.60.62.44, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[25]------ 摘要sha1x16 >cdb6e9f51f8d36b4d9f85d96061718e2dab80be5 
+2015-03-23 9:05:10, INFO, 183.60.62.44, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[33]------ 签名串为 >XhhsqflrPTkLr6mbWyVKcawM3R9MAgkxUnYmv8s1+S5nNoMRvhiKJERtBUBq7BEqS/r6pI+Di375PApXk/ShdQ61UbchyByWmlRazq0rG1Z6YLNdxr2q5R6vV9eqvXwUYPZOm1aj/S/hhrnfV4Zz5T6OeehwIIx27pf0Q9U9+p4= 
+2015-03-23 9:05:10, INFO, 183.60.62.44, File[ /alidata/www/default/unionpay/utf8/func/secureUtil.php ], Line[38]------ =====签名报文结束====== 
+2015-03-23 9:05:10, INFO, 183.60.62.44, File[ /alidata/www/default/unionpay/utf8/gettn.php ], Line[57]------ 后台请求地址为>https://101.231.204.80:5000/gateway/api/appTransReq.do 
+2015-03-23 9:05:11, INFO, 183.60.62.44, File[ /alidata/www/default/unionpay/utf8/gettn.php ], Line[60]------ 后台返回结果为>accessType=0&bizType=000202&certId=3474813271258769001041842579301293446&encoding=utf-8&merId=777290058111477&orderId=2015031854985355&reqReserved= 透传信息&respCode=00&respMsg=成功[0000000]&signMethod=01&tn=201503230905100086928&txnSubType=01&txnTime=20150323090510&txnType=01&version=5.0.0&signature=q/FcvSsb01fDOu6qGMvw5Xa+qbmv7y7FToE7vUtnaHxwoxZLwiODvHtwDvETXi4kga5hFf6eU7xwF/x/4rMSShmg6aajglftyljebS7Kt2DeTM/Z21/artW7SvidLJuNdve02Ldk/MfrSFEvAlakPfbmfbP1uYD6NK0Enlgbrlyngwkt9YMorN7zM0qAsf4vPAdwtPr2D6hf9Sr2rdgJ68NptD8goN53pa0MFif6j/MYmlI/mA+FZsZWGbsa9DI9cQMraDLr/DWGG1pFPCTClrpptlU4DNqcn0sHT76ZpOos/r4Vufx6LQk+/5Bqd6UbJ6dkY4GynHbUVRWW3Ttd+g== 

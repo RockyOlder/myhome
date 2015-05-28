@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>添加开发商</title>
+        <link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/Css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+
+
+            <link rel="stylesheet" href="__PUBLIC__/Css/uploadify.css">
+                <script src='__PUBLIC__/Js/jquery.uploadify.min.js'></script>
+                <script type="text/javascript">
+   
+                </script>
+                <style type="text/css">
+                    .pro{  float: left;line-height: 30px; margin-left: 0px;margin-bottom: 10px;}
+
+                    .sku_tip { background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7);border-radius: 4px;box-shadow: 0 0 3px 3px rgba(150, 150, 150, 0.7);color: #fff;display: none;left: 50%;margin-left: -70px; padding: 5px 10px;position: fixed; text-align: center; top: 50%;z-index: 25;}
+                    .pro select{width: 345px;height: 32px; }
+                    .box{ margin-left: 5px; font-size: 12px; margin-top: -3px; padding-left:5px; padding:3px;}
+                </style>
+                </head>
+                <body style="background: none;">
+
+                    <div class="place">
+                        <span>后台管理：</span>
+                        <ul class="placeul">
+                            <li><a href="#">合作商家管理</a></li>
+                            <li><a href="#">添加商品</a></li>
+                        </ul>
+                    </div>
+                    <form action="" method="post" name ="vform">
+                            <input type ="hidden" name="gid" value="{$info.goods_id}">
+                            <input type ="hidden" name="action" value="{$data.action}">
+                                <input type ="hidden" name="admin" value={$Think.session.admin.name}>
+                                    <div class="formbody">
+                                        <div class="formtitle"><span>{$data.title}</span></div>
+                                        <ul class="forminfo">
+                                            <li><label>选择活动</label>
+                                                <span class = 'pro'>
+                                                    <select name ='aid' id="type_on" class="form-control" >
+                                                        <volist name='vip' id = "vo">
+                                                            <option class = "top_cate" value="{$vo.id}" name="aid" >{$vo.title}</option>
+                                                        </volist>
+                                                    </select>
+                                                </span>
+
+                                                <i id="name_info">名称不能超过30个字符</i></li>
+                                            <li><label>商品名字</label><input name="good_name" id="name" type="text" class="dfinput" value="{$info.goods_name}" /><i id="name_info">名称不能超过30个字符</i></li>
+                                            <li><label>原价</label><input name="o_price" type="text" class="dfinput"  value="{$info.price}" disabled="disabled" /><i>商品价格</i></li>
+                                            <li><label>活动价格</label><input name="price" type="text" class="dfinput" /><i></i></li>
+                                            <li><label>竞价</label><input name="sort" type="text" class="dfinput"  /><i></i></li>
+                                            <li><label>图片</label>
+                                                <div id="list_hidden">
+                                                    <input type ='hidden' name = "list_path" value="{$info.list_path}">
+                                                        <input type ='hidden' name = "goods_img" value="{$info.mid_pic}">
+                                                            <input type ='hidden' name = "pic" value="{$info.list_img}">
+                                                                </div></li>
+                                                                <li style="position:relative;margin-bottom:5px;height:55px"><input name="list_img" id="upload_list" type="file" class="dfinput" style="" value="{$info.list_pic}" /><i  id ="imgs" style="position:absolute;left:150px;top:-5px;">
+                                                                        <if condition = "$info.list_img neq ''">
+                                                                            <div class="up_list_pic">
+                                                                                <img height='50px' src='{$info.list_img}'>
+                                                                                    <img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deleteListPic()'> 
+                                                                                        </div>
+                                                                                        </if>
+                                                                                        </i></li>
+
+                                                                                        <li><label>&nbsp;</label><input name="" type="submit" class="btn btn-primary" value="提交"  onclick="javascript:;" /></li>
+                                                                                        </ul>
+
+                                                                                        </div>
+                                                                                        </form>
+
+                                                                                        </body>     
+                                                                                        <script>
+
+                                                                                            var list_img = "";
+                                                                                            $('#upload_list').uploadify({
+                                                                                                'swf'      : '__PUBLIC__/Images/uploadify.swf',
+                                                                                                'uploader' : '{:U("Uploads/listUpload")}',
+                                                                                                'cancelImage':'__PUBLIC__/Images/uploadify-cancel.png',
+                                                                                                'buttonText' : '图片上传',
+                                                                                                'multi': false,
+                                                                                                'onUploadSuccess' : function(file, data, response) {
+                                                                                                    //   alert(1)
+                                                                                                    obj= $.parseJSON(data);
+                                                                                                    list_img += "<img height='50px' src='"+obj.path+"'>";
+                                                                                                    list_img +=" <img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deleteListPic()'> "
+                                                                                                    $('#imgs').html(list_img);
+                                                                                                    var hid ="<input name='list_path' id='list_path' type='hidden' value='"+obj.path+"' />";
+                                                                                                    hid +="<input name='suolie_img' id='mid_pic' type='hidden' value='"+obj.mid+"' />"
+                                                                                                    hid +="<input name='pic' id='list_pic' type='hidden' value='"+obj.min+"' />"
+                                                                                                    $('#list_hidden').html(hid);
+                                                                                                    list_pic = '';
+                                                                                                    hid='';
+                                                                                                }
+                                                                                            });
+                                                                                            function deletePic(num){
+                                                                                                $("#more_"+num+"").html('');
+                                                                                                // $('this').parent('.more_list_pic').remove();
+                                                                                            }
+                                                                                            /*      function deleteListPic(){
+                                                                                                $(".up_list_pic").html('');
+                                                                                                $('#list_hidden').html('');
+                                                                                            }*/
+                                                                                            function deleteListPic(){
+
+                                                                                                $("#imgs img").remove();
+                                                                                                $('#list_hidde input').remove();
+                                                                                            }
+                                    
+
+                                                                                        </script>
+
+                                                                                        </html>

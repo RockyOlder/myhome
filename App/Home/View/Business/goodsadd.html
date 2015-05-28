@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>添加开发商</title>
+        <link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Js/jquery-ui/css/pepper-grinder/jquery-ui.min.css">
+        <link href="__PUBLIC__/Css/bootstrap.min.css" rel="stylesheet" type="text/css">
+            <link rel="stylesheet" href="__PUBLIC__/Css/uploadify.css">
+            <!-- <link href="__PUBLIC__/Css/select.css" rel="stylesheet" type="text/css" /> -->
+            <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+             <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+            <script type="text/javascript" src='__PUBLIC__/Js/jquery.uploadify.min.js'></script>
+            <script type="text/javascript" src ="__PUBLIC__/ueditor/editor_config.js"></script>
+            <script type="text/javascript" src ="__PUBLIC__/ueditor/editor_all_min.js"></script>
+
+            <!-- <script type="text/javascript" src="__PUBLIC__/Js/jquery.idTabs.min.js"></script> -->
+            <!-- <script type="text/javascript" src="__PUBLIC__/Js/select-ui.min.js"></script> -->
+            <!-- <script type="text/javascript" src="__PUBLIC__/Js/kindeditor.js"></script> -->
+
+
+                <script type="text/javascript">
+                        $(function(){
+
+                            $('form').submit(function(){
+                                if(!checkInput()){
+                                    $('.dfinput').each(function () {
+                                      //  alert($(this).prev().text())
+                                        if($(this).val()==''){
+                                            $(this).next().css("color","red");
+                                            $('.errorColor').css("color","red")
+                                        }
+                                    });
+                                    return false;
+                                }
+                                return true
+                            })
+                            $(".dfinput").bind("focus",function(){
+                                $('#skuNotice').hide();
+                                $(this).addClass("focus");
+                                $(this).next().css("color","#7f7f7f");
+                                if($(this).hasClass("ui-state-error")){
+                                    $(this).removeClass( "ui-state-error" );
+                                    $(".validateTips").removeClass("errorTip").hide();	
+                                }
+                            }).bind("blur",function(){
+                                $(this).removeClass("focus");
+                                if($(this).val()==''){ 
+                                    $(this).next().css("color","red"); }
+                                checkInput();
+                            });
+                        })
+
+                            function setout(){
+                                $('.validateTips').text()
+                                $('#skuNotice').show();
+                                var dingshi= setTimeout( function(){
+                                    $( '#skuNotice' ).fadeOut();
+                                }, ( 1 * 1000 ) );  
+                                return dingshi;
+                            } 
+                            function checkInput(){
+                                var bValid = true;
+                               bValid = bValid && checkEmpty( $("#type_on"), "\u8bf7选择分类！" );//notice商品所属商店
+                      //         bValid = bValid && checkEmpty( $("#bid"), "\u8bf7选择商品所属商店！" );//notice商品所属商店
+                               bValid = bValid && checkEmpty( $("#des"), "商品描述不能为空！" );//notice商品所属商店
+                                  $("#des").removeClass('ui-state-error')
+                               bValid = bValid && checkLength( $("#name"), $("#name").prev().text(), 2, 16 );
+                              bValid = bValid && checkRegexp( $("#price"), /([0-9])+$/i, "价格只能是数字组成" );
+                              bValid = bValid && checkRegexp( $("#m_price"), /([0-9])+$/i, "商场价格只能是数字组成" );
+                        //      bValid = bValid && checkRegexp( $("#t_price"), /([0-9])+$/i, "促销价只能是数字组成" );
+                                if(bValid==false){ setout(); }
+                                return bValid;
+                            }
+                </script>
+                <style type="text/css">
+                    .pro{
+
+                        float: left;
+                        line-height: 30px;
+                        margin-left: 5px;
+                        margin-bottom: 10px;
+                    }
+                    .pro select{
+                        line-height: 30px;
+                    }
+                       .sku_tip { background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7);border-radius: 4px;box-shadow: 0 0 3px 3px rgba(150, 150, 150, 0.7);color: #fff;display: none;left: 50%;margin-left: -70px; padding: 5px 10px;position: fixed; text-align: center; top: 50%;z-index: 25;}
+                </style>
+                </head>
+                <body style="background: none;">
+
+                    <div class="place">
+                          <span>位置： </span>
+                        <ul class="placeul">
+                             <li><a href="{:U('Index/start','','')}">首页</a></li>
+                      
+                            <li>{$data.title}</li>
+                        </ul>
+                    </div>
+                    <form action="" method="post" name ="vform">
+                        <input id="typeId" type ="hidden" name="lgid" value="{$info.lgid}">
+                            <input id="action" type ="hidden" name="action" value="{$data.action}">
+                            <input id="sessionid" type ="hidden" name="seesion" value="{$data.session_id}">
+                                <input type ="hidden" name="admin" value={$Think.session.admin.name}>
+                                    <div class="formbody">
+                                        <div class="formtitle"><span>{$data.title}</span></div>
+                                        <ul class="forminfo">
+                                            <li style = "display:none"><label>生活导航商品编号</label><input name="number" type="text" class="dfinput" value="{$info.lgid}" disabled="disabled"/><i>不用输入，系统自动生成</i></li>
+                                            <li><label>分类</label>
+                                                <span class = 'pro'>
+                                                    <select name = 'cate_pid' class="form-control" id="type_on" >
+                                                        <option class="pro_into" value="{$find.type_id}">{$find.type_name}</option>
+                                                        <volist name='cate' id = "vo">
+                                                            <option class = "top_cate" value="{$vo.type_id}">{$vo.type_name}</option>
+                                                        </volist>
+                                                    </select>
+                                                    <select name = 'cate_id' style="display:none" id ="soncate"  class="form-control">
+                                                    </select>
+                                                </span>
+                                                <i id="type_info"></i></li> 
+                                          <!--  <li><label>商品所属商店</label>
+                                                <span class = 'pro'>
+                                                    <select name = 'bid'class="form-control" id="bid" >
+                                                        <volist name='shop' id = "vo">
+                                                            <option value="{$vo.id}">{$vo.name}</option>
+                                                        </volist>
+                                                    </select>
+                                                </span>
+                                                <i id="type_info"></i></li> -->
+                                                    <div style="display:none" id="skuNotice" class="sku_tip">
+                                                        <span class="validateTips"></span>
+                                                    </div>
+
+                                            <li><label>商品名称</label><input name="lgname" id="name" type="text" class="dfinput" value="{$info.lgname}" /><i id="name_info">名称不能超过30个字符</i></li>
+                                            <li style="height:85px"><label>商品描述</label><textarea rows="5"  cols='50' style="border:1px solid #A7B5BC"  name ="des" id="des" value="{$info.des}" >{$info.des}</textarea><i>描述</i></li>
+                                            <li style="height:85px"><label>商品服务</label><textarea rows="5"  cols='50' style="border:1px solid #A7B5BC" name ="server" value="{$info.server}" >{$info.server}</textarea><i>服务描述</i></li>
+                                            <li style="height:50px"><label>商品详情</label></li>
+                                            <li><textarea rows="5"  cols='40' style="" name ="content"id="intro" value="{$info.content}" >{$info.content}</textarea></li>
+                                                <li><label>商品图片</label>
+                                                    <div id="list_hidden">
+                                                        <input type ='hidden' name = "list_path" value="{$info.list_path}">
+                                                            <input type ='hidden' name = "pic" value="{$info.pic}">
+                                                                <input type ='hidden' name = "list_pic" value="{$info.list_pic}">
+                                                                    </div></li>
+                                                                    <li style="position:relative;margin-bottom:5px;height:55px"><input name="list_pic" id="upload_list" type="file" class="dfinput" style="" value="{$info.list_pic}" /><i  id ="imgs" style="position:absolute;left:150px;top:-5px;">
+                                                                     <if condition = "$info.list_pic neq ''">
+                                                                     <div class="up_list_pic">
+                                                                     <img height='50px' src='{$info.list_pic}'>
+                                                                     <img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deleteListPic()'> 
+                                                                    </div>
+                                                                    </if>
+                                                                    </i></li>
+                                                         <li><label>商品图册</label><i></i></li> 
+                                                                    <li style="position:relative;margin-bottom:5px;height:55px"><input type = "file" id ="upload_more">
+                                                                       <i  id ="imgs_more" style="position:absolute;left:150px;top:-5px;">
+                                                                          <div id = 'more_{$k}' class = ' more_list_pic' num = 0 > 
+                                                                  </div>
+                                                                     <if condition = "$info.pic neq ''">
+                                                                        <volist name="info.pic" id="vo" key = 'k'>
+                                                                           <div id = 'more_{$k}' class = ' more_list_pic' num = "{$k}" style=" float: left">
+                                                                           <img width='50px' src='{$vo.mid}' name ='path'>
+                                                                           <input type='hidden' name='path[]'  value='{$vo.pic}'/>
+                                                                           <input type='hidden' name='mid[]' value='{$vo.mid}'/>
+                                                                           <input type='hidden' name='pic_name[]' value='{$vo.name}'/>
+                                                                           <img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deletePic({$k})' > 
+                                                                    </div>
+                                                                </volist>
+                                                                 </if>
+                                                                 </i></li>
+                                           <!-- <li><label>商品星级</label><input name="star" id="notice" type="text" class="dfinput" value="{$info.star}"/><i></i></li> -->
+                                            <li><label>商场价格</label><input name="price" type="text" id="price" class="dfinput"  value="{$info.price}"/><i>只能输入数字</i></li>
+                                            <li><label>市场价格</label><input name="m_price" type="text" id="m_price" class="dfinput"  value="{$info.m_price}"/><i>只能输入数字</i></li> 
+                                         <!--   <li><label>促销价格</label><input name="t_price" type="text" id="t_price" class="dfinput"  value="{$info.t_price}"/><i>只能输入数字</i></li>  -->
+                                        <!--    <li><label>过期时间</label><input name="pass_time" type="text" class="dfinput"  value="{$info.pass_time}"/><i></i></li>  -->
+
+                                            <li><label>競價排名</label><input name="sort" id="notice" type="text" class="dfinput" value="100"/><i></i></li>
+                                            <li><label>是否鎖定</label><span style="line-height:30px"><input name="is_lock" id="lock" type="radio" class="dfinput" value="0" style="width:50px" checked="checked"/>正常<input name="is_lock" id="lock" type="radio" class="dfinput" value="1" style="width:50px" />鎖定</span><i></i></li>              
+                                            <li><label>&nbsp;</label><input name="" type="submit" class="btn btn-primary" value="确认{$data.btn}"  onclick="javascript:;" /></li>
+
+                                        </ul>
+
+                                    </div>
+                                    </form>
+                                    <!-- <div id="map" style="border:1px solid red;width:100%;height:auto">ditu
+                                        <include file="" />
+                                    </div> -->
+
+                                    </body>
+                                    <script>
+                                        var edit= new UE.ui.Editor({initialContent:'',initialFrameWidth:600});
+                                         edit.render("intro");
+                                  /*      UE.getEditor('intro', {
+                                            theme:"default", //皮肤
+                                            lang:"zh-cn",//语言
+                                            initialFrameWidth:600,  //初始化编辑器宽度,默认800
+                                            initialFrameHeight:320
+                                        });
+                                        */
+                                            var list_pic = "";
+                                            $('#upload_list').uploadify({
+                                                'swf'      : '__PUBLIC__/Images/uploadify.swf',
+                                                'uploader' : '{:U("Uploads/listUpload")}',
+                                                'cancelImage':'__PUBLIC__/Images/uploadify-cancel.png',
+                                                'buttonText' : '图片上传',
+                                                'multi': false,
+                                                'scriptData': {"SESSION_ID":$('#sessionid').val()},
+
+                                              'onUploadSuccess' : function(file, data, response) {
+                                                    // alert(data);
+                                                    obj= $.parseJSON(data);
+                                                    list_pic += "<img height='50px' src='"+obj.path+"'>";
+                                                    list_pic +=" <img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deleteListPic()'> "
+                                                    $('#imgs').html(list_pic);
+                                                    var hid ="<input name='thumb_pic' id='list_path' type='hidden' value='"+obj.path+"' />";
+                                                    hid +="<input name='pic' id='mid_pic' type='hidden' value='"+obj.mid+"' />"
+                                                    hid +="<input name='list_pic' id='list_pic' type='hidden' value='"+obj.min+"' />"
+                                                    $('#list_hidden').html(hid);
+                                                     list_pic = '';
+                                                     hid='';
+                                                }
+                                            });
+                                            var img = '';
+                                            var num = $('.more_list_pic').last().attr('num')+1;
+
+                                            $('#upload_more').uploadify({
+                                                'swf'      : '__PUBLIC__/Images/uploadify.swf',
+                                                'uploader' : '{:U("Uploads/photo",'','')}',
+                                                'cancelImage':'__PUBLIC__/Images/uploadify-cancel.png',
+                                                'buttonText' : '图册上传',
+                                                'scriptData': {"SESSION_ID":$('#sessionid').val()},
+                                                'onUploadSuccess' : function(file, v, response) {
+                                                    obj= $.parseJSON(v);
+                                                    // console.log(obj)
+                                                    img += "<div id = 'more_"+num+"' class = ' more_list_pic' num = '"+num+"' style='float: left'>"
+                                                    img += "<img width='50px' src='"+obj.path+"' name ='path'>";
+                                                    img += "<input type='hidden' name='path[]'  value='"+obj.path+"'/>";
+                                                    img += "<input type='hidden' name='mid[]' value='"+obj.mid+"'/>";
+                                                    img += "<input type='hidden' name='pic_name[]' value='"+obj.name+"'/>";
+                                                    img += "<img src='__PUBLIC__/Images/uploadify-cancel.png' class ='close' onclick = 'javascript:deletePic("+num+")'> ";
+                                                    img += "</div>"
+                                                    $('#imgs_more').append(img);
+                                                    img = '';
+                                                    num++;
+                                                }
+                                            });
+                                            function deletePic(num){
+                                                $("#more_"+num+"").html('');
+                                                // $('this').parent('.more_list_pic').remove();
+                                            }
+                                            function deleteListPic(){
+
+                                                    $("#imgs img").remove();
+                                                    $('#list_hidde input').remove();
+                                            }
+                                   /*     function openwindow()
+                                        {
+                                            var url = 'http://api.map.baidu.com/lbsapi/getpoint/'; //转向网页的地址;
+                                            var name="获取经纬"; //网页名称，可为空;
+                                            var iWidth='800'; //弹出窗口的宽度;
+                                            var iHeight='600'; //弹出窗口的高度;
+                                            //window.screen.height获得屏幕的高，window.screen.width获得屏幕的宽
+                                            var iTop = (window.screen.height-30-iHeight)/2; //获得窗口的垂直位置;
+                                            var iLeft = (window.screen.width-10-iWidth)/2; //获得窗口的水平位置;
+                                            window.open(url,name,'height='+iHeight+',,innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
+                                        }
+                                        function ShowPage()
+                                        {
+                                            showModalDialog('http://api.map.baidu.com/lbsapi/getpoint/','example04','dialogWidth:400px;dialogHeight:300px;dialogLeft:200px;dialogTop:150px;center: yes;help:no;resizable:no;status:no')
+                                        }
+                               */
+                                    </script>
+                                    <script type="Text/Javascript">
+                                    $(function(){
+                                    $('.pro_in').click(function(){
+                                        $('#vallage').hide(200);
+                                        var id =$(this).val();
+                                        // alert(id);
+                                        $('#city').attr('pro',id);
+                                        $('#val_list').html("<p>请选择城市</p>")
+                                        $.ajax({
+                                            url : "{:U('City/city','','')}",
+                                            type : "post",
+                                            data : "id="+id,
+                                            dataType : "json",
+                                            success : function(data){                   
+                                                if(data != null){
+                                                    var str=""
+                                                    $.each(data,function(key,val){
+                                                        str += "<option class='city_in' value="+val['region_id']+" onclick='javascript:getvallage("+val['region_id']+")'>"+val['region_name']+"</option>";
+                                                    })
+                                                    //   $('#city_list').append(str)
+                                                    $('#city_list').html(str);
+                                                    $('#city_list').show(200);
+                                                }
+                                            }
+                                        });         
+                                    })
+
+                             
+                                var pro = function() {
+                                    var id=$("#typeId").val();
+
+                                    $.ajax({
+                                        url : "{:U('GoodstypeAjax','','')}",
+                                        type : "post",
+                                        data : "id="+id,
+                                        dataType : "json",
+                                        success : function(data){     
+                                            console.log(data)
+                                            //   alert(data) 
+                                            if(data != null){
+
+                                                var str=""
+
+                                               str += "<option value="+data.type_id+">"+data.type_name+"</option>";
+
+                                                $.each(data.list,function(key,val){
+                                                str += "<option value="+val['type_id']+">"+val['type_name']+"</option>";
+                                                 })
+                                                $('#soncate').html(str);
+                                                $('#soncate').show(300);
+                                            }
+                                        }
+                                    });    
+                                }
+                                    //province();
+                                    getvallage($(".city_in").val());
+                                    //       pro();
+                                      $('#type_on').bind('change',function(){
+
+
+                                        var id =$(this).val();
+
+                                        $.ajax({
+                                            url : "{:U('sonCate','','')}",
+                                            type : "post",
+                                            data : "id="+id,
+                                            dataType : "json",
+                                            success : function(data){   
+
+                                                if(data != null){
+                                                    var str=""
+                                                    $.each(data,function(key,val){
+                                                        str += "<option  value="+val['type_id']+">"+val['type_name']+"</option>";
+                                                    })
+                                                    $('#soncate').html(str);
+                                                    $('#soncate').show(300);
+                                                }
+                                            }
+                                        });         
+                                    })  
+
+                                    if($("#action").val()!=='add'){ pro(); }   
+
+                                }) 
+                                function getvallage(id){
+
+                                    var id = id;
+                                    $('#vallage').attr('city',id);
+                                    $.ajax({
+                                        url : "{:U('City/vallage','','')}",
+                                        type : "post",
+                                        data : "id="+id,
+                                        dataType : "json",
+                                        success : function(data){                       
+                                            if(data != null){
+                                                var str=""
+                                                $.each(data,function(key,val){
+                                                    str += "<option class='city_in' value="+val['region_id']+">"+val['region_name']+"</option>";
+                                                })
+                                                $('#val_list').html(str);
+                                                $('#val_list').show(200);
+                                            }
+                                        }
+                                    });
+
+                                }
+                                    </script>
+
+                                    </html>

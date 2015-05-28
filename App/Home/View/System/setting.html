@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理员设置</title>
+<link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="__PUBLIC__/Css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/Css/uploadify.css">
+		<script src='__PUBLIC__/Js/jquery.uploadify.min.js'></script>
+
+
+</head>
+<body style="background: none;">
+
+	<div class="place">
+		<span>后台管理：</span>
+		<ul class="placeul">
+			<li>系统管理</li>
+			<li>管理员设置</li>
+		</ul>
+	</div>
+	<form action="" method="post" name="vform">
+			<div class="formbody">
+				<div class="formtitle">
+					<span>{$data.title}</span>
+				</div>
+				<ul class="forminfo">
+					<li><label>个性名称</label><input name="top_name" id="top_name"  type="text" class="dfinput"  value="{$info.top_name}" /><i id="top_name_info">字数不要超过十个字</i></li>
+                    <li ><label>个性logo图标</label><input name="top_logo" id="top_logo"  type="hidden"  value="{$info.top_logo}" class="dfinput" /><img src="{$info.top_logo}" width="50px"  style="background:#056DAA" id ='logo'><i id="top_name_info">大小为72x72</i></li>
+                    
+					
+					<li style="position: relative; margin-bottom: 5px; height: 55px"><input
+						name="file" id="upload_file" type="file" class="dfinput"
+						style="" value="" /></li>
+                    <input type="hidden"  value="{$info.id}" name = "id">
+					<li><label>&nbsp;</label><input name="" type="submit"
+						class="btn btn-primary" value="确认{$data.btn}"
+						onclick="javascript:;" />
+                        
+                    </li>
+				</ul>
+			</div>
+	</form>
+    <script type="text/javascript">
+            $('#upload_file').uploadify({
+                'swf'      : '__PUBLIC__/Images/uploadify.swf',
+                'uploader' : '{:U("Uploads/picture")}',
+                'cancelImage':'__PUBLIC__/Images/uploadify-cancel.png',
+                'buttonText' : '文件上传',
+                'multi': false,
+                'onUploadSuccess' : function(file, data, response) {
+                    //alert(data);
+                    obj= $.parseJSON(data);
+                    $('#top_logo').val(obj);
+                    $('#logo').attr('src',obj);
+                }
+            });     
+        
+    </script>
+
+
+</body>
+</html>

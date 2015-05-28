@@ -1,0 +1,12 @@
+
+@charset "utf-8";
+/* CSS Document */
+
+*{ padding:0px; margin:0px;}
+.table{margin-top: 10px;}
+#max{width: 98%;margin: 10px auto;}
+#top{background: #F4FAFB;text-indent: 2em;line-height: 30px;font-weight: 700;}
+#search{margin-top: 10px;}
+#top .nomal{line-height: 30px;font-weight: 700; color: #000000}
+#top .path{line-height: 30px;font-weight: 700; color: #9CACAF;padding-left: 10px;}
+#footer{margin: 5px auto;background: #F4FAFB;line-height: 50px;text-align: center;}

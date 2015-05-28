@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>无标题文档</title>
+        <link href="__PUBLIC__/Css/style.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/Css/tableList.css" rel="stylesheet" type="text/css" />
+        <!-- <link href="__PUBLIC__/Css/select.css" rel="stylesheet" type="text/css" />        <script type="text/javascript" src="__PUBLIC__/Js/jquery-1.8.3.min.js"></script>      -->
+        <!-- <link rel="stylesheet" type="text/css" href="__PUBLIC__/js/jquery-ui/css/pepper-grinder/jquery-ui.min.css"> jquery-1.8.3.min -->
+        <link type="text/css" href="__PUBLIC__/Js/jquery-ui/css/start/jquery-ui-1.8.16.custom.css" rel="stylesheet" />	
+        <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+            <script type="text/javascript" src="__PUBLIC__/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+            <link rel="stylesheet" type="text/css" href="__PUBLIC__/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+       
+        <script type="text/javascript" src="__PUBLIC__/Js/common.js"></script>
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/bootstrap.min.css">
+            <script type="text/javascript" src="__PUBLIC__/Js/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
+            <script language="javascript">
+
+                function deleteSum(id){
+                    if(confirm("确认删除"))
+                        location.href="/whr/index.php?s=/Home/Business/del/id/"+id
+                }
+            </script>
+
+            <script type="text/javascript">
+                $(function(){
+                    initPager();
+                            $(".vip_auth_user_one").fancybox({
+				wrapCSS    : 'fancybox-custom',
+				closeClick : true,
+
+				openEffect : 'none',
+
+				helpers : {
+					title : {
+						type : 'inside'
+					}
+				}
+			});
+                });
+
+            </script>
+            <style>
+                    .sku_tip { background: none repeat scroll 0 0 rgba(0, 0, 0, 0.7);border-radius: 4px;box-shadow: 0 0 3px 3px rgba(150, 150, 150, 0.7);color: #fff;display: none;left: 50%;margin-left: -70px; padding: 5px 10px;position: fixed; text-align: center; top: 50%;z-index: 25;}
+                    .pro select{width: 345px;height: 32px; }
+                    #val_list{width: 345px;height: 32px;  margin-left: 85px;}
+                    #table_list tr td{ padding: 7px;}
+                    .th_default a{ width: 70px;}
+                    #ig_primary{float: right; margin-top: 3px;}
+                    #img_add{ position: absolute; float: left; margin-top: 205px; margin-left: 85px;}
+                    .spanText{ margin-top: 10px; float: left;}
+
+            </style>
+    </head>
+
+
+    <body style="background: none;">
+        <input type="hidden" value="__CONTROLLER__/details" id="url_getTeacher" name="url_getTeacher" />
+        <div class="place">
+             <span>位置： </span>
+            <ul class="placeul">
+                <li><a href="{:U('Index/start','','')}">首页</a></li>
+                <li>物业信息管理</li>
+                <li>{$tag}</li>
+            </ul>
+        </div>
+ 
+
+            <div class="formtitle"><span>{$data.title}</span></div>
+
+            <ul class="forminfo">
+                <li><label>标题</label><i class="spanText">{$info.title}</i></li>
+                <if condition = "$info.pic neq ''"><li><label>图片</label><a href="{$info.pic}" class="vip_auth_user_one" ><img src="{$info.pic}" width=150px" height="100px"/></a></li></if>
+                <li><label>内容</label><i class="spanText">{$info.content}</i></li>
+                <li><label>发布人</label><i class="spanText">{$info.author}</i></li>
+                <li><label>联系人</label><i class="spanText">{$info.username}</i></li>
+                <li><label>发布时间</label><i class="spanText">{$info.add_time|date="Y-m-d H:i:s",###}</i></li>
+            </ul>
+            <div style="display:none" id="skuNotice" class="sku_tip">
+                <span class="validateTips"></span>
+            </div>
+   
+                    <table class="tablelist">
+                        <thead>
+                            <tr>
+    
+                            <!--    <th>标题</th> -->
+                                <th>回复内容</th>
+                                <th>发布人</th>
+                                <th>发布时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table_ajax_list">
+                            <volist name="info.list" id ="vo">
+                                <tr>
+
+                                 <!--   <td>{$vo.title}</td> -->
+                                    <td>{$vo.content|msubstr=0,50,'utf-8',true}</td>
+                                    <td>{$vo.author}</td>
+                                    <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>      
+                                    <td class="th_default">    
+                                    <!--    <a class="btn btn-default" title="编辑" onclick="update_list({$vo.id})">修改</a>   activein  -->
+                                   <a href="{:U('activein',array(sheild=>$vo['id']),'')}" class="btn btn-default" title="屏蔽" onclick="if(confirm('确认删除')){return true}else{return false}">屏蔽</a>     
+                                    </td>
+                                </tr> 
+                            </volist>    
+                        </tbody>
+                    </table>
+            <div id="pager" class="pager">
+                <div class="fanye">
+                    <div class="fanye1">
+                        {$page}
+                    </div>
+                    <div class="fanye2">
+                        <span class="">共{$currentPage}/{$totalPage}页</span>
+                        转到<input type="text" value="{$currentPage}" id="gopage_input" class="ui-widget-header" />页&nbsp;
+                        <input type="button" value="确定" id="gopage_btn_confirm" />
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $('.imgtable tbody tr:odd').addClass('odd');
+            </script>
+
+    </body>
+
+</html>
